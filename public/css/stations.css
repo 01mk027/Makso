@@ -1,0 +1,35 @@
+.station{
+  background-color: yellow;
+  width: 300px;
+  height: 400px;
+  display:inline-block;
+  margin: 20px;
+}
+
+.caption{
+  text-align: center;
+}
+
+.square{
+  width:150px;
+  height: 150px;
+  background-color: green;
+  margin: auto;
+  width: 50%;
+}
+
+.logo{
+  width:150px;
+  height:150px;
+}
+
+.location-info
+{
+  margin: 20px;
+  text-align: center;
+}
+
+.cpad{
+  margin: auto;
+  width: 50%;  
+}

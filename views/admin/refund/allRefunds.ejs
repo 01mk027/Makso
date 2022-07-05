@@ -1,0 +1,73 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+   <div class="form-fence-station-group">
+    <div class="form-fence-station">
+      <form class="login-form" action="/admin/create-document-for-accepted-refunds" method="post">
+       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+       <button class="btn" type="submit">DÖKÜMAN OLUŞTUR (KABUL)</button>
+      </form>
+    </div>
+    <div class="form-fence-station">
+      <form class="login-form" action="/admin/create-document-for-rejected-refunds" method="post">
+       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+       <button class="btn" type="submit">DÖKÜMAN OLUŞTUR (RED)</button>
+      </form>
+    </div>
+  </div>
+   <% if(refundSuccess) %>
+     <%= refundSuccess %>
+   <% if(refundFail) %>
+     <%= refundFail %>
+   <% if(refundRejectSuccess) %>
+     <%= refundRejectSuccess %>
+    <% if(docs.length > 0) { %>
+      <h1 style="text-align: center;"><%= captionWithRefund %></h1>
+      <table border="1">
+        <tr>
+          <th>İŞLEME AÇ</th>
+          <th>TALEP TARİHİ</th>
+          <th>MÜŞTERİ İSİM</th>
+          <th>MÜŞTERİ SOYİSİM</th>
+          <th>İADE TALEP AÇIKLAMASI</th>
+          <th>ÖDEME TARİHİ</th>
+          <th>MİKTAR</th>
+          <th>KART AİLESİ</th>
+          <th>KART TİPİ</th>
+          <th>CEVAP</th>
+          <th id="accOrRefH"></th>
+          <th>ONAY</th>
+        </tr>
+        <% for(let i=0; i<docs.length; i++){ %>
+        <tr>
+          <td> <input type="checkbox" class="toggles" id="accOrRef<%= i %>" onchange="controlOfCheckboxes(this)"> </td>
+          <form method="post" id="form<%= i %>">
+          <td><%= docs[i].requestDate %></td>
+          <td><%= docs[i].customerName %></td>
+          <td><%= docs[i].customerSurname %></td>
+          <td><%= docs[i].requestDescription %></td>
+          <td><%= docs[i].paymentDate %></td>
+          <td><%= docs[i].price %></td>
+          <td><%= docs[i].cardFamily %></td>
+          <td><%= docs[i].cardAssociation %></td>
+          <td><textarea maxlength="50" id="resp<%= i %>" name="response"></textarea></td>
+          <td><input type="checkbox" class="gates" id="gates<%= i %>" onchange="setHeader(this)"></td>
+
+          <input type="hidden" name="refundId" value="<%= docs[i]._id %>">
+          <input type="hidden" name="paymentTransactionId" value="<%= docs[i].paymentTransactionId %>">
+          <input type="hidden" name="ipAddress" value="<%= docs[i].ipAddress %>">
+          <input type="hidden" name="price" value="<%= docs[i].price %>">
+          <input type="hidden" name="conversationId" value="<%= docs[i].conversationId %>">
+
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <td><button type="submit" id="button<%= i %>">İŞLEME AL</button></td>
+          </form>
+        </tr>
+        <% } %>
+      </table>
+    <% } else { %>
+      <h1><%= captionWithoutRefund %></h1>
+    <% } %>
+   <script type="text/javascript" src="/js/admin/allRefunds.js"></script>
+  <%- include('../../includes/end.ejs') %>

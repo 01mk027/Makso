@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(successAddRequest)%>
+    <%= successAddRequest %>
+
+    <% if(failAddRequest)%>
+    <%= failAddRequest %>
+  <!-- //Ödeme tarihi	Ödemenin yapıldığı istasyon	Ödenen Miktar
+  //status        paymentDate        stationId.location      paidPrice      paymentId conversationId !-->
+  <% if(docs.length > 0) { %>
+    <table border="1">
+      <tr><th colspan="4">Hangi ödemenizin iadesini talep ediyorsunuz?</th></tr>
+      <tr>
+        <th>Ödeme Tarihi</th>
+        <th>Ödemenin yapıldığı istasyon</th>
+        <th>Ödenen Miktar</th>
+        <th>Talep formu linki</th>
+      </tr>
+      <% for(let i=0; i<docs.length; i++){ %>
+      <tr>
+        <td><%= docs[i].paymentDate %></td>
+        <td><%= docs[i].stationId.location %></td>
+        <td><%= docs[i].paidPrice %></td>
+        <td>
+          <% if(!docs[i].isRequestedForRefund){ %>
+            <a href="/refund-form?q1=<%=docs[i].paymentTransactionId%>&q2=<%=docs[i]._id%>">Talep Formuna Git</a>
+          <% } else {%>
+            <p>Talep değerlendirme aşamasında</p>
+          <% } %>
+        </td>
+      </tr>
+      <% } %>
+    </table>
+  <% } else {%>
+    <h1>Ödemeniz olmadığından dolayı talep oluşturmanız mümkün değildir.</h1>
+  <% } %>
+<%- include('../includes/end.ejs') %>

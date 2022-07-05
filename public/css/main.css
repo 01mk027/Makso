@@ -1,0 +1,512 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+
+* {
+  box-sizing: border-box;
+}
+html, body{
+  height: 100%;
+  font-family: 'Open Sans', sans-serif;
+  margin: 0;
+}
+/*body {
+  padding-bottom: 0;
+  margin: 0;
+  font-family: 'Open Sans', sans-serif;
+  min-height: 100%;
+}
+*/
+main {
+  padding: 1rem;
+  margin: auto;
+}
+
+form {
+  display: inline;
+}
+
+.centered {
+  text-align: center;
+}
+
+.image {
+  height: 20rem;
+}
+
+.image img {
+  height: 100%;
+}
+
+.main-header {
+  width: 100%;
+  height: 3.5rem;
+  background-color: #000000;
+  padding: 0 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.main-header__nav {
+  height: 100%;
+  width: 100%;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.main-header__item-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+.main-header-dropdown{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  position: fixed;
+}
+
+.main-header__item {
+  margin: 0 1rem;
+  padding: 0;
+}
+
+.main-header__item a,
+.main-header__item button {
+  font: inherit;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
+
+.main-header__item a:hover,
+.main-header__item a:active,
+.main-header__item a.active,
+.main-header__item button:hover,
+.main-header__item button:active {
+  color: #ffeb3b;
+}
+
+.mobile-nav {
+  width: 30rem;
+  height: 100vh;
+  max-width: 90%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 10;
+  padding: 2rem 1rem 1rem 2rem;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.mobile-nav.open {
+  transform: translateX(0);
+}
+
+.mobile-nav__item-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-nav__item {
+  margin: 1rem;
+  padding: 0;
+}
+
+.mobile-nav__item a,
+.mobile-nav__item button {
+  font: inherit;
+  text-decoration: none;
+  color: black;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.mobile-nav__item a:active,
+.mobile-nav__item a:hover,
+.mobile-nav__item a.active,
+.mobile-nav__item button:hover,
+.mobile-nav__item button:active {
+  background: #00695c;
+  color: white;
+  border-radius: 3px;
+}
+
+.mobile-nav__item-sub{
+  font-size: 12px;
+}
+
+
+#side-menu-toggle {
+  border: 1px solid white;
+  font: inherit;
+  padding: 0.5rem;
+  display: block;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+}
+
+#side-menu-toggle:focus {
+  outline: none;
+}
+
+#side-menu-toggle:active,
+#side-menu-toggle:hover {
+  color: #ffeb3b;
+  border-color: #ffeb3b;
+}
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+  display: none;
+}
+
+.grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: stretch;
+}
+
+.card {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
+}
+
+.card__header,
+.card__content {
+  padding: 1rem;
+}
+
+.card__header h1,
+.card__content h1,
+.card__content h2,
+.card__content p {
+  margin: 0;
+}
+
+.card__image {
+  width: 100%;
+}
+
+.card__image img {
+  width: 100%;
+}
+
+.card__actions {
+  padding: 1rem;
+  text-align: center;
+}
+
+.card__actions button,
+.card__actions a {
+  margin: 0 0.25rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.25rem 1rem;
+  text-decoration: none;
+  font: inherit;
+  border: 1px solid #000000;
+  color: #FFA500;
+  background: white;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.btn:hover,
+.btn:active {
+  background-color: #FFA500;
+  color: white;
+}
+
+.btn.danger {
+  color: red;
+  border-color: red;
+}
+
+.btn.danger:hover,
+.btn.danger:active {
+  background: red;
+  color: white;
+}
+
+.user-message {
+  margin: auto;
+  width: 90%;
+  border: 1px solid #4771fa;
+  padding: 0.5rem;
+  border-radius: 3px;
+  background: #b9c9ff;
+  text-align: center;
+}
+
+.user-message--error {
+  border-color: red;
+  background: rgb(255, 176, 176);
+  color: red;
+}
+
+.dropdownPaymentMenu {
+     position: relative;
+      display: inline-block;
+}
+/* set the size and position of button on web */
+.button {
+     padding: 10px 30px;
+     font-size: 15px;
+}
+/* provide css to background of list items */
+#list-items-payment-menu {
+    display: none;
+    position: absolute;
+    background-color: #000000;
+    min-width: 80px;
+}
+/* provide css to list items */
+#list-items-payment-menu a {
+     display: block;
+     font-size: 12px;
+     background-color: #000;
+     color:#ff0;
+     text-decoration: none;
+     margin: 10px;
+}
+
+
+.upper-dashboard{
+  display: block;
+}
+
+.greeting{
+  margin-left: 15px;
+  margin-top: 15px;
+  float:left;
+}
+
+.membership-point{
+  margin-right: 15px;
+  float: right;
+}
+
+.station-frame{
+  display: inline-block;
+  margin-bottom: 30px;
+}
+
+.form-fence-station
+{
+  display: inline-block;
+}
+
+.form-fence-station-group
+{
+  margin-top: 20px;
+  display: block;
+}
+
+.main-admin-article{
+  white-space: pre;
+  margin: auto;
+  width: 50%;
+}
+
+.info{
+  display: inline-block; // Browser destekleri için ilaveten kullanıyoruz
+  word-break: break-word;
+  table-layout:fixed; // Bu css kodu ise HTML tablonuz varsa kullanıyoruz
+}
+
+.firmLogo{
+  content:url("/logo/logoBigger.png");
+  margin-right: 20px;
+}
+
+.mainPicDiv{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.mainPic{
+  width: 200px;
+  height: 200px;
+  float: center;
+  margin-top: 50px;
+}
+
+.routeHref{
+  width:50%;
+  margin: auto;
+}
+
+.bottom-content-left
+{
+  margin-top: 15px;
+  margin-bottom:5px;
+  margin: auto;
+  width: 50%;
+}
+
+
+
+.bottom{
+  /*margin-top: 0px;
+
+  height: 80px;
+  background-color: #000000;
+  padding: 10px 10px 0px 10px;
+  bottom: 0;*/
+  height: 75px;
+  position: sticky;
+  top: 115vh;
+  width: 100%;
+  background-color: #000000;
+}
+
+.bottom-logo
+{
+  margin-right: 10px;
+  float: left;
+  display: flex;
+}
+
+
+.bottom-text-firm-name
+{
+  color: #FFA500;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+
+.bottom-text{
+  color: #FFFFFF;
+  font-size: 10px;
+}
+
+.card-list-table
+{
+  margin: auto;
+  width: 50%;
+}
+.new-card-add
+{
+  margin: auto;
+  width: 50%;
+}
+/*=========================== FORM CONTROL START =============================*/
+.form-control {
+  margin: 1rem 0;
+}
+
+.form-control label,
+.form-control input,
+.form-control select,
+.form-control textarea {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control select,
+.form-control textarea {
+  border: 1px solid #a1a1a1;
+  font: inherit;
+  border-radius: 2px;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+  outline-color: #00695c;
+}
+.login-form {
+  width: 20rem;
+  max-width: 90%;
+  margin: auto;
+  display: block;
+}
+
+/*============================ FORM CONTROL END ==============================*/
+
+/*===============================STATIONS START===============================*/
+.station{
+  background-color: yellow;
+  width: 300px;
+  height: 400px;
+  display:inline-block;
+  margin: 20px;
+}
+
+.caption{
+  text-align: center;
+}
+
+.square{
+  width:150px;
+  height: 150px;
+  background-color: green;
+  margin: auto;
+  width: 50%;
+}
+
+.logo{
+  width:150px;
+  height:150px;
+}
+
+.location-info
+{
+  margin: 20px;
+  text-align: center;
+}
+
+.cpad{
+  margin: auto;
+  width: 50%;
+}
+/*===============================STATIONS END=================================*/
+
+
+@media (min-width: 768px) {
+  .main-header__nav {
+    display: flex;
+  }
+
+  #side-menu-toggle {
+    display: none;
+  }
+
+  .user-message {
+    width: 30rem;
+  }
+}
+
+@media (max-width: 700px)
+{
+  .firmLogo{
+    content:url("");
+    margin: 0px;
+  }
+}

@@ -1,0 +1,88 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body onload="loaded()">
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(cards[0].cardNumber){ %>
+      <% for(let i=0; i<cards.length; ++i){%>
+         <button type="button" onclick="fillCardInputs(<%=cards[i].cardNumber%>,<%=cards[i].expireMonth%>, <%=cards[i].expireYear%>, <%=cards[i].cvv%>)"><%= cards[i].bankName %> KARTIYLA ÖDE</button>
+      <% } %>
+    <% } %>
+    <h3>Şarj süresi 30 dakika olarak farzedilmiştir. Fiyatlandırma buna göre yapılmıştır.</h3>
+    <table border="1">
+      <tr>
+      <th>AC tarifeler</th>
+      <th>DC tarifeler</th>
+      </tr>
+      <tr>
+      <td>7.4 kVA'a kadar 0.50 TL/dk.</td>
+      <td>24 kW'a kadar    1.9 TL/dk.</td>
+     </tr>
+     <tr>
+       <td>11 kVA'a kadar   0.80 TL/dk.</td>
+       <td>50 kW'a kadar    3.3 TL/dk.</td>
+     </tr>
+     <tr>
+       <td>22 kVA'a kadar  1.15 TL/dk.</td>
+     </tr>
+    </table>
+    <br>
+    <form action="/sarj" method="post" name="paymentForm">
+
+      <label for="voltageType">Lütfen şarj etmek istediğiniz voltaj tipini seçiniz:</label>
+      <select name="voltageType" id="voltageType" onchange="handleChange()" required>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="AC">AC</option>
+        <option value="DC">DC</option>
+      </select><br>
+
+      <label for="ACDesc" id="ACDescLabel">Lütfen enerji sınırını seçiniz</label>
+      <select name="ACDesc" id="ACDesc">
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="0.5"> 7.4 kVA'a kadar</option>
+        <option value="0.8"> 11 kVa'a  kadar</option>
+        <option value="1.15">22 kVa'a  kadar</option>
+      </select><br>
+
+      <label for="DCDesc" id="DCDescLabel">Lütfen enerji sınırını seçiniz</label>
+      <select name="DCDesc" id="DCDesc">
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="1.9">24 kW'a kadar</option>
+        <option value="3.3">50 kW'a kadar</option>
+      </select><br>
+
+
+       <label for="cardNumber">Kart Numarasını Giriniz:</label>
+       <input type="text" name="cardNumber" id="cardNumber" required/><br>
+
+       <label for="expireMonth">Ay:</label>
+       <select name="expireMonth" id="expireMonth" required>
+       <option selected value disabled>Lütfen bir değer seçiniz</option>
+       <% for(let i=1; i<=12; i++) { %>
+         <option value="<%= i %>"><%= i %></option>
+       <% } %>
+     </select><br>
+
+       <label for="expireYear">Yıl:</label>
+       <select name="expireYear" id="expireYear" required>
+         <option selected value disabled>Lütfen bir değer seçiniz</option>
+       <% for(let i=2023; i<=2030; i++) { %>
+         <option value="<%= i %>"><%= i %></option>
+       <% } %>
+     </select><br>
+
+       <label for="cvc">CVC:</label>
+       <input type="text" name="cvv" id="cvv" required/><br>
+
+       <% if(loyaltyAgreement) { %>
+        <p>Sadakat sözleşmesi yapmış bulunduğunuzdan ötürü indirimli şarj etme hakkına sahipsiniz. Aşağıdaki kutuya tıklayarak %20 indirimle şarj işlemini gerçekleştirebilirsiniz.</p>
+        <label for="discount">İndirimli şarj et: </label>
+        <input type="checkbox" name="discount" id="discount"/>
+       <% } %>
+       <br>
+       <input type="hidden" name="stationId" value="<%= stationId %>">
+       <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+       <button type="submit">ŞARJ İŞLEMİNİ BAŞLAT</button>
+    </form>
+    <script type="text/javascript" src="/js/chargeScripts.js">
+    </script>
+  <%- include('../includes/end.ejs') %>

@@ -1,0 +1,79 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <% if(docs.length > 0){ %>
+      <table border="1">
+        <tr>
+          <th>EVS'ye ödenen toplam miktar: </th>
+          <td><%= totalEvs %> ₺</td>
+        </tr>
+        <tr>
+          <th>TEİAŞ'a ödenen toplam miktar: </th>
+          <td><%= totalTedas %> ₺</td>
+        </tr>
+        <tr>
+          <th>Toplam Kar: </th>
+          <td><%= totalPayout %> ₺</td>
+        </tr>
+        <tr>
+          <th>İyzico'ya verilen ödeme başı kesinti ücreti: (Birim Fiyat=0.25 ₺) </th>
+          <td><%= iyziCommissionFee %> ₺</td>
+        </tr>
+        <tr>
+          <th>İyzico'ya verilen ücret: </th>
+          <td><%= iyziCommissionRateAmount %> ₺</td>
+        </tr>
+      </table>
+
+
+
+      <form action="/admin/create-document-for-a-day" method="post">
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+        <button type="submit">DÖKÜM OLUŞTUR</button>
+      </form>
+    <h2><%= captionWithPayment %></h2>
+    <table border="1">
+    <tr>
+      <th>Ödeme durumu</th>
+      <th>Net kar</th>
+      <th>Müşteri İsim</th>
+      <th>Müşteri Soyisim</th>
+      <th>Ödeme Tarihi</th>
+      <th>Ödeme Açıklama</th>
+      <th>Hangi İstasyon</th>
+    </tr>
+
+    <% for(let i=0; i < docs.length; ++i){%>
+      <% if(docs[i].customerId) {%>
+      <tr>
+      <% if(docs[i].status == "success"){ %>
+          <td style="background-color: green;"><%= "Başarılı" %></td>
+      <% } else{%>
+          <td style="background-color: red;"><%= "Başarısız" %></td>
+      <% } %>
+      <% if(docs[i].merchantPayoutAmount){ %>
+          <td><%= docs[i].merchantPayoutAmount.toFixed(2)+" ₺"%></td>
+      <% } else {%>
+           <td><%= "Kâr yok." %></td>
+      <% } %>
+      <td><%= docs[i].customerId.name%></td>
+      <td><%= docs[i].customerId.surname%></td>
+      <td><%= docs[i].paymentDate%></td>
+      <% if(docs[i].status == "success"){ %>
+        <td style="background-color: green;">Ödeme Başarılı.</td>
+      <% } else { %>
+        <td style="background-color: red;"><%= docs[i].errorMessage %></td>
+      <% } %>
+      <td><%= docs[i].stationId.location %></td>
+      </tr>
+      <% } %>
+    <% } %>
+
+
+  </table>
+  <% } else { %>
+    <h2><%= captionWithoutPayment %></h2>
+  <% } %>
+
+<%- include('../../includes/end.ejs') %>

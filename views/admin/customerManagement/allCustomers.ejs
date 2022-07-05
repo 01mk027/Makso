@@ -1,0 +1,39 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <% if(suspendSuccess) %>
+      <%= suspendSuccess %>
+    <% if(activateSuccess) %>
+      <%= activateSuccess %>
+    <% if(discountEnabled) %>
+      <%= discountEnabled %>
+    <% if(discountDisabled) %>
+      <%= discountDisabled %>
+    <% if(docs.length > 0) {%>
+      <table border="1">
+        <tr>
+          <th>İsim</th>
+          <th>Soyisim</th>
+          <th>E-Mail</th>
+          <th>Şehir</th>
+          <th>Ülke</th>
+          <th>Detaylar</th>
+        </tr>
+        <% for(let i=0; i<docs.length; i++) {%>
+          <tr>
+            <td><%= docs[i].name %></td>
+            <td><%= docs[i].surname %></td>
+            <td><%= docs[i].email %></td>
+            <td><%= docs[i].city %></td>
+            <td><%= docs[i].country %></td>
+            <td>
+              <a href="/admin/customer-details?cun=<%=docs[i]._id%>">Detaylar</a>
+            </td>
+          </tr>
+        <% } %>
+      </table>
+    <% } else {%>
+
+    <% } %>
+  <%- include('../../includes/end.ejs') %>

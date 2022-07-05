@@ -1,0 +1,21 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <form class="login-form" action="/admin/payment-for-interval-result" method="get" onsubmit="return compare()">
+      <div class="form-control">
+        <h3>Aşağıdaki kutulardan tarihler seçerek, seçili tarihler arasında yapılmış olan ödemeleri görebilirsiniz.</h3>
+        <h3 style="color:red"><u>UYARI:</u></h3><h3>1.Tarihin, 2.Tarihten küçük olmasına dikkat ediniz.</h3>
+      </div>
+      <div class="form-control">
+        <label for="prevDate">1.Tarih</label>
+        <input type="date" name="prevDate" id="prevDate" required/><br>
+      </div>
+      <div class="form-control">
+        <label for="forwDate">2.Tarih</label>
+        <input type="date" name="forwDate" id="forwDate" required/><br>
+      </div>
+      <button class="btn" type="submit">SORGULA</button>
+    </form>
+    <script type="text/javascript" src="/js/admin/paymentForAnInterval.js"></script>
+  <%- include('../../includes/end.ejs') %>

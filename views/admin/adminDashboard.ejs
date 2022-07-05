@@ -1,0 +1,42 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/adminNavigation.ejs') %>
+  <% if(unauthorizedPassAdmin) %>
+  <%= unauthorizedPassAdmin %>
+
+    <div class="greeting">
+      Hoşgeldiniz Sayın <b><%= adminInfo.name %> <%= adminInfo.surname %></b>
+    </div>
+
+    <main class="main-admin-article">
+      
+    <table border="1">
+      <tr>
+      <th>Müşteri Görebilme Yetkiniz</th>
+      <th>Ödemeleri Görebilme Yetkiniz</th>
+      <th>İstasyonları Görebilme Yetkiniz</th>
+      </tr>
+      <tr>
+      <% if(adminInfo.customerAuth){ %>
+      <td>Var</td>
+      <% } else {%>
+      <td>Yok</td>
+      <% } %>
+      <% if(adminInfo.paymentAuth){ %>
+      <td>Var</td>
+      <% } else {%>
+      <td>Yok</td>
+      <% } %>
+      <% if(adminInfo.stationAuth){ %>
+      <td>Var</td>
+      <% } else {%>
+      <td>Yok</td>
+      <% } %>
+      </tr>
+    </table>
+  </main>
+
+
+
+<%- include('../includes/end.ejs') %>

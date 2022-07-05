@@ -1,0 +1,11 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(errorMessage){ %>
+      <%= errorMessage %>
+    <% }if(successMessage) { %>
+      <%= successMessage %>
+    <% } %>
+     Dashboard'a dönmek için <a href="/dashboard">tıklayınız</a>.
+<%- include('../includes/end.ejs') %>

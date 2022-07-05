@@ -1,0 +1,40 @@
+{
+  "name": "chargeStation",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.20.0",
+    "canvas": "^2.9.1",
+    "chart.js": "^3.7.1",
+    "chartjs-node-canvas": "^4.1.6",
+    "chartjs-plugin-annotation": "^1.4.0",
+    "chartjs-plugin-datalabels": "^2.0.0",
+    "chartjs-plugin-trendline": "^1.0.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "csurf": "^1.11.0",
+    "dotenv": "^16.0.1",
+    "ejs": "^3.1.6",
+    "env": "^0.0.2",
+    "excel4node": "^1.7.2",
+    "express": "^4.17.3",
+    "express-session": "^1.17.2",
+    "iyzipay": "^2.0.48",
+    "luhn-js": "^1.1.2",
+    "moment": "^2.29.3",
+    "mongodb": "^4.5.0",
+    "mongoose": "^6.2.10",
+    "nodemon": "^2.0.16",
+    "os": "^0.1.2",
+    "request-ip": "^2.1.3"
+  }
+}

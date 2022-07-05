@@ -1,0 +1,53 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(errorMessage){ %>
+    <%= errorMessage %>
+    <% } %>
+    <% if(errorAddCard){ %>
+      <%= errorAddCard %>
+    <% } %>
+    <form class="login-form" action="/add-card" method="post">
+      <div class="form-control">
+        <label for="cardNumber">Kart Numarasını Giriniz:</label>
+        <input type="text" name="cardNumber" id="cardNumber" required/>
+      </div>
+      <div class="form-control">
+        <label for="expireMonth">Ay:</label>
+        <select name="expireMonth" id="expireMonth" required>
+          <option selected disabled value>Lütfen bir değer seçiniz</option>
+          <% for(let i=1; i<=12; i++) { %>
+            <option value="<%= i %>"><%= i %></option>
+            <% } %>
+        </select>
+      </div>
+
+      <div class="form-control">
+        <label for="expireYear">Yıl:</label>
+        <select name="expireYear" id="expireYear" required>
+          <option selected disabled value>Lütfen bir değer seçiniz</option>
+          <% for(let i=2023; i<=2030; i++) { %>
+            <option value="<%= i %>"><%= i %></option>
+          <% } %>
+        </select>
+      </div>
+
+      <div class="form-control">
+        <label for="cvv">CVC:</label>
+        <input type="text" name="cvv" id="cvv" required/><br>
+      </div>
+
+      <div class="form-control">
+        <label for="bankName">Banka ismi: </label>
+        <input type="text" name="bankName" id="bankName" required/>
+      </div>
+
+      <div class="form-control">
+        <label for="cardType">Kart tipi: </label>
+        <input type="text" name="cardType" id="cardType" required/>
+      </div>
+     <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+     <button class="btn" type="submit">KART EKLE</button>
+    </form>
+  <%- include('../includes/end.ejs') %>

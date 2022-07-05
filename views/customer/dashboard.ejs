@@ -1,0 +1,45 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(unauthorizedPass) %>
+    <%= unauthorizedPass %>
+    <div class="upper-dashboard">
+      <% var arr= [name, surname];%>
+      <p class="greeting">Sayın <b><%= arr.join(" "); %></b> sisteme hoşgeldiniz.</p>
+      <p class="membership-point">Üyelik puanınız: <%= membershipPoint %></p>
+    </div>
+
+    <!--form action="/customer-payments" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">YAPTIĞIM ÖDEMELER</button>
+    </form>
+    <form action="/add-card" method="post">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">KART EKLE</button>
+    </form>
+    <form action="/my-carts" method="get">
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">KARTLARIM</button>
+    </form!-->
+<!--/update, /customer-payments,/refundable-list!-->
+    <div class="station-frame centered">
+    <% for(let i=0; i<stations.length; i++) {%>
+      <div class="station">
+        <div class="caption"><h3>İstasyon <%= i+1 %></h3></div>
+        <div class="square"><img class="logo" src="maksopus.jpg" /></div>
+        <div class="location-info"><b><%= stations[i].location %></b></div>
+        <div class="cpad">
+          <!--form action="/sarj" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <input type="hidden" name="station_id" value="<%= stations[i]._id %>">
+            <button type="submit">ŞARJ İŞLEMİNİ BAŞLAT</button>
+          </form!-->
+          <a href="/sarj?stid=<%=stations[i]._id%>">Şarj işlemi için tıklayınız...</a>
+        </div>
+      </div>
+    <% } %>
+    </div>
+    <%= successCharge %>
+  <%- include('../includes/end.ejs') %>

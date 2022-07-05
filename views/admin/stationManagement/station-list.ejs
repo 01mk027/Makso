@@ -1,0 +1,33 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+     <div class="form-fence-station-group">
+        <div class="form-fence-station">
+          <form class="login-form" action="/admin/sketch-profit-per-station" method="get">
+            <button class="btn" type="submit">İSTASYON BAŞI KAZANÇ GRAFİĞİNİ GÖR</button>
+          </form>
+        </div>
+        <div class="form-fence-station">
+          <form class="login-form" action="/admin/sketch-number-of-usage-per-station" method="get">
+            <button class="btn" type="submit">İSTASYON BAŞI KULLANIM SAYISI GRAFİĞİNİ GÖR</button>
+          </form>
+        </div>
+      </div>
+    <% if(stationSuspended) %>
+      <%= stationSuspended %>
+    <% if(stationEnabled) %>
+      <%= stationEnabled %>
+    <% if(repairEnabled) %>
+      <%= repairEnabled %>
+    <% for(let i=0; i<stations.length; i++) {%>
+      <div class="station">
+        <div class="caption"><h3>İstasyon <%= i+1 %> <%=stations[i].isOpen ? '(Aktif)' : '(Devre Dışı)'%></h3></div>
+        <div class="square"><img class="logo" src="/maksopus.jpg" /></div>
+        <div class="location-info"><b><%= stations[i].location %></b></div>
+        <div class="cpad">
+          <a href="/admin/station-details?stid=<%=stations[i]._id%>">İstasyon detayları ve diğer işlemler için tıklayınız...</a>
+        </div>
+      </div>
+    <% } %>
+<%- include('../../includes/end.ejs') %>

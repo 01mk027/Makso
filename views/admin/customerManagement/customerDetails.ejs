@@ -1,0 +1,102 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+      <table border="1">
+        <tr>
+          <tr>
+            <th>İsim: </th>
+            <td><%= docs.name %></td>
+          </tr>
+          <tr>
+            <th>Soyisim: </th>
+            <td><%= docs.surname %></td>
+          </tr>
+          <tr>
+            <th>Telefon numarası: </th>
+            <td><%= docs.phoneNumber %></td>
+          </tr>
+          <tr>
+            <th>Fatura adresi: </th>
+            <td><%= docs.billAddress %></td>
+          </tr>
+          <tr>
+            <th>Şehir: </th>
+            <td><%= docs.city %></td>
+          </tr>
+          <tr>
+            <th>Ülke: </th>
+            <td><%= docs.country %></td>
+          </tr>
+          <tr>
+            <th>Email: </th>
+            <td><%= docs.email %></td>
+          </tr>
+          <tr>
+            <th>Doğum Tarihi: </th>
+            <td><%= docs.birthDate %></td>
+          </tr>
+          <tr>
+            <th>Kayıt Tarihi: </th>
+            <td><%= docs.registrationDate %></td>
+          </tr>
+          <!-- Kredi kartları gösterilecek !-->
+          <tr>
+            <th>Son Giriş Tarihi: </th>
+            <td><%= docs.lastLogin %></td>
+          </tr>
+          <tr>
+            <th>Son Çıkış Tarihi: </th>
+            <td><%= docs.lastLogout %></td>
+          </tr>
+          <tr>
+            <th>Üyelik Puanı: </th>
+            <td><%= docs.membershipPoint %></td>
+          </tr>
+          <% if(docs.isSuspended == true) { %>
+          <tr>
+            <th>Hesap durumu: </th>
+            <td>Hesap Askıda</td>
+          </tr>
+          <% } else if(docs.isSuspended == false) {%>
+            <tr>
+              <th>Hesap durumu: </th>
+              <td>Hesap Aktif</td>
+            </tr>
+          <% } %>
+      </table>
+        <form action="/admin/<%= docs.isSuspended===false ? 'suspend-user':'activate-user'%>" method="post">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit"><%=docs.isSuspended===false ? 'HESABI ASKIYA AL' : 'HESABI AKTİFLEŞTİR'%></button>
+        </form>
+
+        <form action="/admin/<%= docs.loyaltyAgreement===false ? 'permit-discount':'prevent-discount'%>" method="post">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <button type="submit"><%=docs.loyaltyAgreement===false ? 'İNDİRİMLİ ŞARJI AKTİF ET' : 'İNDİRİMLİ ŞARJI ENGELLE'%></button>
+        </form>
+
+        <form action="/admin/sketch-user-activities-success" method="get">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <button type="submit">BAŞARILI ÖDEME GRAFİĞİ GÖR (FİYAT)</button>
+        </form>
+
+        <form action="/admin/sketch-user-activities-unsuccess" method="get">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <button type="submit">BAŞARISIZ ÖDEME GRAFİĞİ GÖR (SAYI)</button>
+        </form>
+
+        <form action="/admin/sketch-users-station-usage" method="get">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <button type="submit">KULLANICI İSTASYON KULLANIM SAYISI GRAFİĞİ</button>
+        </form>
+
+
+        <form action="/admin/sketch-users-station-payment" method="get">
+          <input type="hidden" name="id" value="<%=docs._id%>">
+          <button type="submit">KULLANICI İSTASYON BAŞINA ÖDEME GRAFİĞİ</button>
+        </form>
+
+
+<%- include('../../includes/end.ejs') %>

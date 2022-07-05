@@ -1,0 +1,128 @@
+<div class="backdrop"></div>
+<header class="main-header">
+  <div>
+    <img class="firmLogo" alt="">
+  </div>
+
+    <button id="side-menu-toggle">Menü</button>
+    <nav class="main-header__nav">
+        <ul class="main-header__item-list">
+          <% if(isAdmin) {%>
+                <li class="main-header__item">
+                    <a href="/admin/admin-dashboard">Dashboard</a>
+                </li>
+                <li class="main-header__item">
+                <div class="dropdownPaymentMenu">
+                  <a onclick="showHidePaymentMenu()">Ödemeler</a>
+                      <!-- dropdown list items will show when we click the drop button -->
+                      <center>
+                      <div id="list-items-payment-menu">
+                         <a href="/admin/all-payments">Tüm ödemeler</a>
+                         <a href="/admin/payment-for-a-day">Günlük Ödeme Sorgula</a>
+                         <a href="/admin/payment-for-interval">Tarih Aralığı İçin Ödeme Sorgula</a>
+                         <a href="/admin/payment-for-month">Aylık Ödeme Sorgula</a>
+                      </div>
+                      </center>
+                </div>
+                </li>
+                <li class="main-header__item">
+                    <a href="/admin/refund-requests">İade Taleplerini Görüntüle</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/admin/customer-list">Tüm Müşterileri Görüntüle</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/admin/station-list">Tüm İstasyonları Görüntüle</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/update">Bilgi Güncelle</a>
+                </li>
+        </ul>
+        <ul class="main-header__item-list">
+            <!-- if (!isAuthenticated) { !-->
+                <!--li class="main-header__item">
+                    <a href="/login">Giriş Yap</a>
+                </li>
+                <li class="main-header__item">
+                    <a href="/register">Kaydol</a>
+                </li!-->
+            <!-- } else { !-->
+                <li class="main-header__item">
+                  <form action="/logout" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Çıkış</button>
+                  </form>
+                </li>
+            <% } else { %>
+              <li class="main-header__item">
+                 <p style="color: white;">Hoşgeldiniz, lütfen giriş yapın.</p>
+              </li>
+            <% } %>
+        </ul>
+    </nav>
+</header>
+<!--a href="/add-card">KART EKLE</a>
+<a href="/my-cards">KARTLARIM</a>
+<a href="/update">BİLGİLERİMİ GÜNCELLE</a>
+<a href="/customer-payments">HAREKETLER</a>
+<a href="/refundable-list">İADE TALEBİ OLUŞTUR</a>
+<a href="/refund-list">İADE TALEPLERİM</a!-->
+
+<nav class="mobile-nav">
+    <ul class="mobile-nav__item-list">
+      <% if(isAdmin){ %>
+        <li class="mobile-nav__item">
+            <a href="/admin/admin-dashboard">Dashboard</a>
+        </li>
+        <li class="mobile-nav__item">
+          <!--div class="dropdownPaymentMenu"!-->
+            <button onclick="showHidePaymentMenuMobile()">Ödemeler</button>
+                <!-- dropdown list items will show when we click the drop button -->
+                <center>
+                <div id="list-items-payment-menu-mobile">
+                  <ul class="mobile-nav__item-list">
+                   <li class="mobile-nav__item"><a href="/admin/all-payments">Tüm ödemeler</a></li>
+                   <li class="mobile-nav__item"><a href="/admin/payment-for-a-day">Günlük Ödeme Sorgula</a></li>
+                   <li class="mobile-nav__item"><a href="/admin/payment-for-interval">Tarih Aralığı İçin Ödeme Sorgula</a></li>
+                   <li class="mobile-nav__item"><a href="/admin/payment-for-month">Aylık Ödeme Sorgula</a></li>
+                  </ul>
+                </div>
+                </center>
+          <!--/div!-->
+        </li>
+        <li class="mobile-nav__item">
+            <a href="/admin/refund-requests">İade Taleplerini Görüntüle</a>
+        </li>
+        <!-- if (isAuthenticated) { !-->
+            <li class="mobile-nav__item">
+                <a href="/admin/customer-list">Tüm Müşterileri Görüntüle</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/admin/station-list">Tüm İstasyonları Görüntüle</a>
+            </li>
+
+            <li class="mobile-nav__item">
+                <a href="/update">Bilgi Güncelle</a>
+            </li>
+        <!-- } !-->
+        <!-- if (!isAuthenticated) { !-->
+            <!--li class="mobile-nav__item">
+                <a href="/login">Giriş Yap</a>
+            </li>
+            <li class="mobile-nav__item">
+                <a href="/register">Kaydol</a>
+            </li!-->
+        <!-- } else { !-->
+            <li class="mobile-nav__item">
+                <form action="/logout" method="post">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit">Çıkış</button>
+                </form>
+            </li>
+        <% } else {%>
+          <li class="main-header__item">
+             <p style="color: black;">Hoşgeldiniz, lütfen giriş yapın.</p>
+          </li>
+        <% } %>
+    </ul>
+</nav>

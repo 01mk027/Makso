@@ -1,0 +1,17 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <!-- Burada ödemeye dair bilgiler doldurulup, tabloda gösterilecek!-->
+    <h3 style="text-align: center;">İade Talep Formu:</h3>
+    <form class="login-form" action="/complete-refund-request" method="post">
+       <div class="form-control">
+        <label for="refundDescription">Lütfen neden iade talebinde bulunduğunuzu kısaca yazın:</label>
+        <textarea name="refundDescription" maxlength="200" style="vertical-align: top;" required></textarea>
+       </div>
+      <input type="hidden" name="transactionId" value="<%= paymentTransactionId %>"/>
+      <input type="hidden" name="id" value="<%= id %>"/>
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn" type="submit">TALEP OLUŞTUR</button>
+    </form>
+  <%- include('../includes/end.ejs') %>

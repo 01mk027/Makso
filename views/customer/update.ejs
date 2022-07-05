@@ -1,0 +1,93 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body onload="loaded()">
+    <%- include(isAdmin ? '../includes/adminNavigation.ejs':'../includes/customerNavigation.ejs') %>
+    <main style="margin-bottom: 120px;">
+    <h5 class="centered">Güncelleme yaptığınız takdirde şifreniz ve doğum tarihiniz sıfırlanır, ilgili alanları yeni baştan yazmalısınız. Ayrıca güncelleme yapıldıktan sonra oturumunuz kapanacak ve yeniden giriş sayfasına yönlendirileceksiniz.</h5>
+    <form class="login-form" action="/update" method="POST">
+       <div class="form-control">
+        <label for="name">Adınız</label>
+        <input type="text" name="name" id="name" value="<%= userInfo.name %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="surname">Soyadınız</label>
+        <input type="text" name="surname" id="surname" value="<%= userInfo.surname %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="phoneNumber">Cep telefonu numaranız</label>
+        <input type="text" name="phoneNumber" id="phoneNumber" value="<%= userInfo.phoneNumber %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="password">Şifreniz</label>
+        <input type="password" name="password" id="password" required/>
+       </div>
+       <div class="form-control">
+        <label for="billAddress">Adresiniz</label>
+        <input type="text" name="billAddress" id="billAddress" value="<%= userInfo.billAddress %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="city">Yaşadığınız şehir</label>
+        <input type="text" name="city" id="city" value="<%= userInfo.city %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="country">Yaşadı ğınız ülke</label>
+        <input type="text" name="country" id="country" value="<%= userInfo.country %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="email">E-posta adresiniz</label>
+        <input type="email" name="email" id="email" value="<%= userInfo.email %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="tckn">TC Kimlik Numaranız</label>
+        <input type="text" name="tckn" id="tckn" value="<%= userInfo.identityCardNumber %>" required/>
+       </div>
+       <div class="form-control">
+        <label for="birthDate">Doğum Tarihiniz</label>
+        <input type="date" name="birthDate" id="birthDate" required/>
+       </div>
+       <div class="form-control">
+        <label for="zipCode">Posta Kodunuz</label>
+        <input type="number" name="zipCode" id="zipCode" value="<%= userInfo.zipCode %>" required/>
+       </div>
+      <% if(isAdmin) {%>
+       <div class="form-control">
+        <label for="isAdmin" id="isAdminId">Admin olarak mı kayıt yapıyorsunuz?</label>
+        <select name="isAdmin" id="isAdmin" onchange="handleChange()" required>
+          <option disabled selected value>Lütfen bir değer seçiniz</option>
+          <option value="true">Evet</option>
+          <option value="false">Hayır</option>
+        </select>
+        </div>
+        <div class="form-control">
+          <label for="stationAuth" id="stationAuthId">İstasyon görebilme yetkisi</label>
+          <select name="stationAuth" id="stationAuth">
+          <option disabled selected value>Lütfen bir değer seçiniz</option>
+          <option value="true">Evet</option>
+          <option value="false">Hayır</option>
+          </select>
+        </div>
+        <div class="form-control">
+        <label for="paymentAuth" id="paymentAuthId">Ödeme görebilme yetkisi</label>
+        <select name="paymentAuth" id="paymentAuth">
+          <option disabled selected value>Lütfen bir değer seçiniz</option>
+          <option value="true">Evet</option>
+          <option value="false">Hayır</option>
+        </select>
+        </div>
+        <div class="form-control">
+          <label for="customerAuth" id="customerAuthId">Müşterileri görebilme yetkisi</label>
+          <select name="customerAuth" id="customerAuth">
+            <option disabled selected value>Lütfen bir değer seçiniz</option>
+            <option value="true">Evet</option>
+            <option value="false">Hayır</option>
+          </select>
+        </div>
+    <% }%>
+
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button class="btn" type="submit">GÜNCELLE</button>
+    </form>
+   <script type="text/javascript" src="/js/updateScripts.js"></script>
+   </main>
+<%- include('../includes/end.ejs') %>

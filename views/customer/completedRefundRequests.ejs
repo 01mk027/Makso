@@ -1,0 +1,39 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(docs.length > 0) { %>
+    <table border="1">
+      <tr>
+        <th colspan="6">İade taleplerinize dair sonuçlar bu sayfada listelenmektedir.</th>
+      <tr>
+      <tr>
+        <th>Ödeme Zamanı</th>
+        <th>İade Talep Zamanı</th>
+        <th>Ödenen Miktar</th>
+        <th>İade açıklaması</th>
+        <th>Cevap</th>
+        <th>İade Durumu</th>
+      </tr>
+      <% for(let i=0; i<docs.length; i++) {%>
+      <tr>
+        <td><%= docs[i].paymentDate %></td>
+        <td><%= docs[i].requestDate %></td>
+        <td><%= docs[i].price %></td>
+        <td><%= docs[i].requestDescription %></td>
+        <td><%= docs[i].response %></td>
+        <td>
+          <% if(docs[i].isRefunded){ %>
+            İade edildi
+          <% } else { %>
+            İade edilmedi.
+          <% } %>
+        </td>
+      </tr>
+      <%}%>
+    </table>
+    <% } else {%>
+       <h1>İade talebiniz bulunmamaktadır.</h1>
+    <% } %>
+    
+  <%- include('../includes/end.ejs') %>

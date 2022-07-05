@@ -1,0 +1,28 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <form class="login-form" action="/admin/payment-for-month-result" method="get">
+      <div class="form-control">
+        <h3>Bu sayfada aylık ödemelerin listesi oluşturulmaktadır.</h3>
+      </div>
+      <div class="form-control">
+      <select name="month" id="month" required>
+        <option selected disabled value>Lütfen listeden bir ay seçiniz</option>
+        <option value="0">Ocak</option>
+        <option value="1">Şubat</option>
+        <option value="2">Mart</option>
+        <option value="3">Nisan</option>
+        <option value="4">Mayıs</option>
+        <option value="5">Haziran</option>
+        <option value="6">Temmuz</option>
+        <option value="7">Ağustos</option>
+        <option value="8">Eylül</option>
+        <option value="9">Ekim</option>
+        <option value="10">Kasım</option>
+        <option value="11">Aralık</option>
+      </select>
+      </div>
+      <button class="btn" type="submit">SORGULA</button>
+    </form>
+  <%- include('../../includes/end.ejs') %>

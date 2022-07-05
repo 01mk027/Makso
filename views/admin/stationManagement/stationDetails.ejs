@@ -1,0 +1,74 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <table border="1">
+      <tr>
+        <th colspan="2"><%= station.location %> İSTASYONUNA DAİR BİLGİLER </th>
+      </tr>
+      <tr>
+        <th>Harcanan Toplam Güç</th>
+        <td><%= station.wastedPower %></td>
+      </tr>
+      <tr>
+        <th>Son Bağlantı Kesilme Zamanı</th>
+        <td><%= station.lastDisconnectionTime[station.lastDisconnectionTime.length - 1] ? station.lastDisconnectionTime[station.lastDisconnectionTime.length - 1] : 'Hiç kesinti yaşanmadı.' %></td>
+      </tr>
+      <tr>
+        <th>Son Açılma Zamanı</th>
+        <td><%= station.lastOpeningTime[station.lastOpeningTime.length - 1] ? station.lastOpeningTime[station.lastOpeningTime.length - 1] : 'Hiç kesinti yaşanmadı.' %></td>
+      </tr>
+
+
+      <tr>
+        <th>Lokasyon</th>
+        <td><%= station.location %></td>
+      </tr>
+      <tr>
+        <th>Son Tamir Başlangıç Zamanı</th>
+        <td><%= station.lastRepairingTime[station.lastRepairingTime.length - 1] ? station.lastRepairingTime[station.lastRepairingTime.length - 1] : 'Hiç tamir edilmedi.' %></td>
+      </tr>
+      <tr>
+        <th>Son Tamir Bitiş Zamanı</th>
+        <td><%= station.lastRepairingFinishTime[station.lastRepairingFinishTime.length - 1] ? station.lastRepairingFinishTime[station.lastRepairingFinishTime.length - 1] : 'Hiç tamir edilmedi.' %></td>
+      </tr>
+      <tr>
+        <th>Boşa geçen toplam zaman (sn)</th>
+        <td><%= station.totalWastedTime %></td>
+      </tr>
+      <tr>
+        <th>Toplam Çalışma Süresi (sn)</th>
+        <td><%= station.totalOperatingTime %></td>
+      </tr>
+    </table>
+
+    <form action="/admin/<%=station.isOpen==true ? 'disable-station' : 'enable-station'%>" method="get">
+      <input type="hidden" name="stid" value="<%=station._id%>">
+      <button type="submit"  <%=station.isRepairing == true ? "disabled" : ""%>><%=station.isOpen==true ? 'İSTASYONU DEVRE DIŞI BIRAK' : 'İSTASYONU ETKİNLEŞTİR'%></button>
+    </form>
+
+    <form action="/admin/<%=station.isRepairing==true ? 'disable-repair-station' : 'enable-repair-station'%>" method="get">
+      <input type="hidden" name="stid" value="<%=station._id%>">
+      <button type="submit" <%=station.isOpen == true ? "disabled" : ""%>><%=station.isRepairing==true ? 'TAMİRİ BİTİR' : 'TAMİRİ BAŞLAT'%></button>
+    </form>
+
+    <form action="/admin/sketch-customer-usage-of-station" method="get">
+      <input type="hidden" name="stid" value="<%=station._id%>">
+      <button type="submit">İSTASYONUN KULLANICILAR TARAFINDAN KULLANILMA SIKLIĞI GRAFİĞİ (SAYI)</button>
+    </form>
+
+
+    <form action="/admin/sketch-profit-per-customer-for-station" method="get">
+      <input type="hidden" name="stid" value="<%=station._id%>">
+      <button type="submit">İSTASYON İÇİN KULLANICI BAŞI EDİNİLEN KAR</button>
+    </form>
+
+
+    <form action="/admin/create-document-for-station" method="get">
+      <input type="hidden" name="stid" value="<%=station._id%>">
+      <button type="submit">DÖKÜM OLUŞTUR</button>
+    </form>
+
+
+
+<%- include('../../includes/end.ejs') %>

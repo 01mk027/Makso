@@ -1,0 +1,15 @@
+<%- include('../../includes/head.ejs') %>
+  </head>
+  <body>
+    <%- include('../../includes/adminNavigation.ejs') %>
+    <form class="login-form" action="/admin/payment-for-a-day-result" method="get">
+      <div class="form-control">
+         <h3>Aşağıdaki kutudan tarih seçerek, seçtiğiniz tarihte yapılan ödemeleri görebilirsiniz.</h3>
+      </div>
+       <div class="form-control">
+        <label for="requestDay"></label>
+        <input type="date" name="requestDay" id="requestDay" required/>
+       </div>
+      <button class="btn" type="submit">SORGULA</button>
+    </form>
+<%- include('../../includes/end.ejs') %>

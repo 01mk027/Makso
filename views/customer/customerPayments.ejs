@@ -1,0 +1,32 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body>
+  <%- include('../includes/customerNavigation.ejs') %>
+  <div class="caption" style="text-align: center ;">
+    <h1>ÖDEMELERİM</h1>
+  </div>
+  <table border="1">
+  <tr>
+    <th>Ödeme durumu</th>
+    <th>Ödeme tarihi</th>
+    <th>Ödemenin yapıldığı istasyon</th>
+    <th>Ödenen Miktar</th>
+  </tr>
+
+  <% for(let i=0; i < docs.length; ++i){%>
+    <tr>
+    <% if(docs[i].status == "success"){ %>
+        <td style="background-color: green;"><%= "Başarılı" %></td>
+    <% } else{%>
+        <td style="background-color: red;"><%= "Başarısız" %></td>
+    <% } %>
+    <td><%= docs[i].paymentDate %></td>
+    <td><%= docs[i].stationId.location %></td>
+    <td><%= docs[i].price %></td>
+    </tr>
+    <% } %>
+
+
+
+</table>
+<%- include('../includes/end.ejs') %>

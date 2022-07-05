@@ -1,0 +1,85 @@
+<%- include('../includes/head.ejs') %>
+  </head>
+  <body onload="loaded()">
+    <%- include('../includes/customerNavigation.ejs') %>
+    <% if(errorRegister) {%>
+    <%= errorRegister %>
+    <% } %>
+    <form action="/register" method="POST">
+      <label for="name">Adınız</label>
+      <input type="text" name="name" id="name" required/><br>
+
+      <label for="surname">Soyadınız</label>
+      <input type="text" name="surname" id="surname" required/><br>
+
+      <label for="phoneNumber">Cep telefonu numaranız</label>
+      <input type="text" name="phoneNumber" id="phoneNumber" required/><br>
+
+      <label for="password">Şifreniz</label>
+      <input type="password" name="password" id="password" required/><br>
+
+      <label for="billAddress">Adresiniz</label>
+      <input type="text" name="billAddress" id="billAddress" required/><br>
+
+      <label for="city">Yaşadığınız şehir</label>
+      <input type="text" name="city" id="city" required/><br>
+
+      <label for="country">Yaşadığınız ülke</label>
+      <input type="text" name="country" id="country" required/><br>
+
+      <label for="email">E-posta adresiniz</label>
+      <input type="email" name="email" id="email" required/><br>
+
+      <label for="tckn">TC Kimlik Numaranız</label>
+      <input type="text" name="tckn" id="tckn" required/><br>
+
+      <label for="birthDate">Doğum Tarihiniz</label>
+      <input type="date" name="birthDate" id="birthDate" required/><br>
+
+      <label for="zipCode">Posta Kodunuz</label>
+      <input type="number" name="zipCode" id="zipCode" required/><br>
+
+      <label for="isAdmin" id="isAdminId">Admin olarak mı kayıt yapıyorsunuz?</label>
+      <select name="isAdmin" id="isAdmin" onchange="handleChange()" required/>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="true">Evet</option>
+        <option value="false">Hayır</option>
+      </select><br>
+
+      <label for="stationAuth" id="stationAuthId">İstasyon görebilme yetkisi</label>
+      <select name="stationAuth" id="stationAuth"/>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="true">Evet</option>
+        <option value="false">Hayır</option>
+      </select><br>
+
+      <label for="paymentAuth" id="paymentAuthId">Ödeme görebilme yetkisi</label>
+      <select name="paymentAuth" id="paymentAuth"/>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="true">Evet</option>
+        <option value="false">Hayır</option>
+      </select><br>
+
+      <label for="customerAuth" id="customerAuthId">Müşterileri görebilme yetkisi</label>
+      <select name="customerAuth" id="customerAuth"/>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="true">Evet</option>
+        <option value="false">Hayır</option>
+      </select><br>
+
+
+      <label for="refundAuth" id="refundAuthId">İadeleri görebilme yetkisi</label>
+      <select name="refundAuth" id="refundAuth"/>
+        <option disabled selected value>Lütfen bir değer seçiniz</option>
+        <option value="true">Evet</option>
+        <option value="false">Hayır</option>
+      </select><br>
+
+
+
+
+      <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+      <button type="submit">KAYDOL</button>
+    </form>
+    <script type="text/javascript" src="/js/registerScripts.js"></script>
+<%- include('../includes/end.ejs') %>
